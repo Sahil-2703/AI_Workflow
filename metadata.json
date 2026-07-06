@@ -1,0 +1,6 @@
+{
+  "name": "Aetheris Productivity Core",
+  "description": "Premium cyber-luxe cognitive dashboard featuring dynamic Eisenhower task prioritization, interactive habit streaks, role-specific Grok AI prompt workflows, and persistent Supabase database connections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
