@@ -3,12 +3,15 @@ import { Check, Sparkles, X, Activity, HelpCircle, ArrowRight } from "lucide-rea
 import { motion } from "motion/react";
 
 interface PricingPageProps {
+  key?: string;
   currentTier: string;
   onUpgrade: (tier: string) => void;
   onClose: () => void;
 }
 
 export default function PricingPage({ currentTier, onUpgrade, onClose }: PricingPageProps) {
+  const [billingCycle, setBillingCycle] = React.useState<"monthly" | "annual">("monthly");
+
   const plans = [
     {
       id: "free",
@@ -34,8 +37,8 @@ export default function PricingPage({ currentTier, onUpgrade, onClose }: Pricing
     {
       id: "lite",
       name: "Lite Subscription",
-      price: "$9",
-      period: "per month",
+      price: billingCycle === "monthly" ? "$9" : "$90",
+      period: billingCycle === "monthly" ? "per month" : "per year",
       desc: "Essential features for busy professionals, scholars, and builders striving for structure.",
       features: [
         "100 Grok-Beta workflow tokens/mo",
@@ -54,8 +57,8 @@ export default function PricingPage({ currentTier, onUpgrade, onClose }: Pricing
     {
       id: "premium",
       name: "Premium Subscription",
-      price: "$29",
-      period: "per month",
+      price: billingCycle === "monthly" ? "$29" : "$290",
+      period: billingCycle === "monthly" ? "per month" : "per year",
       desc: "The ultimate cognitive stack with unlimited Grok AI power and live cloud persistence.",
       features: [
         "Unlimited Grok-2 Real-Time tokens",
@@ -93,7 +96,7 @@ export default function PricingPage({ currentTier, onUpgrade, onClose }: Pricing
         </button>
       </div>
 
-      <div className="max-w-5xl mx-auto text-center mb-12 relative z-10">
+      <div className="max-w-5xl mx-auto text-center mb-6 relative z-10">
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-mono tracking-widest uppercase mb-4">
           <Sparkles className="w-3.5 h-3.5 text-violet-400" />
           <span>Frictionless Access Channels</span>
@@ -104,6 +107,35 @@ export default function PricingPage({ currentTier, onUpgrade, onClose }: Pricing
         <p className="mt-2.5 text-xs md:text-sm text-slate-400 font-sans max-w-xl mx-auto leading-relaxed font-light">
           Choose a tier corresponding to your cognitive demands. Unlimit your Grok workflows and activate Supabase live cloud-sync.
         </p>
+      </div>
+
+      {/* Billing Cycle Option Selector (Top of these 3 divs) */}
+      <div className="flex justify-center mb-10 relative z-10">
+        <div className="bg-slate-950/60 p-1.5 rounded-2xl border border-violet-500/15 flex items-center space-x-1.5 backdrop-blur-md">
+          <button
+            onClick={() => setBillingCycle("monthly")}
+            className={`px-5 py-2.5 rounded-xl font-mono text-xs tracking-wider uppercase font-bold transition-all duration-300 flex items-center space-x-2 cursor-pointer ${
+              billingCycle === "monthly"
+                ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-slate-100 shadow-md shadow-violet-500/10"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/30"
+            }`}
+          >
+            <span>Monthly</span>
+          </button>
+          <button
+            onClick={() => setBillingCycle("annual")}
+            className={`px-5 py-2.5 rounded-xl font-mono text-xs tracking-wider uppercase font-bold transition-all duration-300 flex items-center space-x-2 cursor-pointer ${
+              billingCycle === "annual"
+                ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-slate-100 shadow-md shadow-violet-500/10"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/30"
+            }`}
+          >
+            <span>Annual</span>
+            <span className="text-[9px] bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-1.5 py-0.5 rounded font-sans uppercase font-black tracking-normal">
+              -20% Save
+            </span>
+          </button>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 w-full">

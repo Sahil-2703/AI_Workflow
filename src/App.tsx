@@ -40,9 +40,8 @@ interface ChatConvo {
 
 export default function App() {
   // Navigation Routing States
-  // views: "landing" | "auth" | "onboarding" | "dashboard"
-  const [currentView, setCurrentView] = useState<"landing" | "auth" | "onboarding" | "dashboard">("landing");
-  const [showPricing, setShowPricing] = useState(false);
+  // views: "landing" | "auth" | "onboarding" | "dashboard" | "pricing"
+  const [currentView, setCurrentView] = useState<"landing" | "auth" | "onboarding" | "dashboard" | "pricing">("landing");
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   // Authenticated User States
@@ -213,7 +212,7 @@ export default function App() {
     // Token cap check for Free users
     if (user.tier === "free" && user.tokensUsed >= 5) {
       alert("Token threshold reached (5/5 Free Tokens). Please upgrade your console to Lite or Premium to unlock unlimited high-throughput Grok AI queries!");
-      setShowPricing(true);
+      setCurrentView("pricing");
       return;
     }
 
@@ -387,7 +386,7 @@ export default function App() {
           {/* Right Navigation elements */}
           <div className="flex items-center space-x-3.5">
             <button
-              onClick={() => setShowPricing(true)}
+              onClick={() => setCurrentView("pricing")}
               className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-slate-100 text-xs font-mono tracking-wider uppercase font-bold transition-all duration-300 hover:scale-105 glow-purple cursor-pointer"
             >
               UPGRADE
@@ -470,7 +469,7 @@ export default function App() {
                 if (user) setCurrentView("dashboard");
                 else setCurrentView("auth");
               }}
-              onOpenPricing={() => setShowPricing(true)}
+              onOpenPricing={() => setCurrentView("pricing")}
             />
           )}
 
@@ -500,6 +499,30 @@ export default function App() {
             <OnboardingPage
               key="onboarding"
               onSuccess={handleOnboardingSuccess}
+            />
+          )}
+
+          {currentView === "pricing" && (
+            <PricingPage
+              key="pricing"
+              currentTier={user ? user.tier : "free"}
+              onUpgrade={(selectedTier) => {
+                if (user) {
+                  const updatedU = { ...user, tier: selectedTier, tokensUsed: 0 };
+                  setUser(updatedU);
+                  localStorage.setItem("aetheris_user", JSON.stringify(updatedU));
+                  setCurrentView("dashboard");
+                } else {
+                  setCurrentView("auth");
+                }
+              }}
+              onClose={() => {
+                if (user) {
+                  setCurrentView("dashboard");
+                } else {
+                  setCurrentView("landing");
+                }
+              }}
             />
           )}
 
@@ -779,21 +802,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Full screen Pricing Matrix Modal Overlay */}
-      {showPricing && (
-        <PricingPage
-          currentTier={user ? user.tier : "free"}
-          onUpgrade={(selectedTier) => {
-            if (user) {
-              const updatedU = { ...user, tier: selectedTier, tokensUsed: 0 };
-              setUser(updatedU);
-              localStorage.setItem("aetheris_user", JSON.stringify(updatedU));
-            }
-            setShowPricing(false);
-          }}
-          onClose={() => setShowPricing(false)}
-        />
-      )}
+
 
       {/* Profile Details Modal Popup (Requirement 4a - view profile) */}
       <AnimatePresence>
