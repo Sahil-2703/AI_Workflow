@@ -350,113 +350,198 @@ export default function App() {
       
       {/* Sticky Top Navigation Bar (Always rendered across views except auth/onboarding) */}
       {currentView !== "auth" && currentView !== "onboarding" && (
-        <header className="static z-40 w-full glassmorphic border-b border-violet-500/15 backdrop-blur-xl px-6 py-4 flex items-center justify-between" id="sticky-header">
-          {/* Left Brand block with toggleable drawer */}
-          <div className="flex items-center space-x-4">
-            {user && (
-              <button
-                onClick={() => setSidebarOpen(true)}
-                className="p-2 rounded-xl bg-violet-600/10 hover:bg-violet-600/20 border border-violet-500/15 hover:border-violet-500/30 text-violet-300 transition-all cursor-pointer"
-                title="Open Conversation History"
-                id="sidebar-toggle-btn"
-              >
-                <Menu className="w-5 h-5" />
-              </button>
-            )}
-            <div className="flex items-center space-x-2.5">
-              <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-pink-500 p-0.5 glow-purple">
-                <div className="w-full h-full bg-slate-950 rounded-md flex items-center justify-center">
-                  <Cpu className="w-4 h-4 text-violet-400" />
-                </div>
-              </div>
-              <span className="font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-100 to-pink-300 tracking-wider text-sm">
-                AETHERIS AI
+        currentView === "landing" || currentView === "pricing" ? (
+          <header className="static z-40 w-full bg-slate-950/40 border-b border-slate-900 px-8 py-5 flex items-center justify-between" id="sticky-header">
+            {/* Left brand logo */}
+            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setCurrentView("landing")}>
+              <span className="font-display font-black tracking-wider text-base text-slate-100 uppercase">
+                Aetheris AI
               </span>
             </div>
-          </div>
 
-          {/* Sticky Middle indicator */}
-          <div className="hidden md:flex items-center space-x-2 bg-slate-950/40 border border-violet-500/5 px-4 py-1.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-            <span className="font-mono text-[10px] text-slate-400 tracking-widest uppercase font-bold">
-              AI WORKFLOW OPERATIONS
-            </span>
-          </div>
-
-          {/* Right Navigation elements */}
-          <div className="flex items-center space-x-3.5">
-            <button
-              onClick={() => setCurrentView("pricing")}
-              className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-slate-100 text-xs font-mono tracking-wider uppercase font-bold transition-all duration-300 hover:scale-105 glow-purple cursor-pointer"
-            >
-              UPGRADE
-            </button>
-
-            {user ? (
-              <div className="relative">
-                {/* Profile Trigger */}
-                <button
-                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center space-x-2 bg-slate-950/60 hover:bg-slate-900 border border-violet-500/15 hover:border-violet-500/30 px-3 py-2 rounded-xl transition-all cursor-pointer"
-                  id="profile-dropdown-btn"
-                >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-violet-500 to-pink-500 flex items-center justify-center font-bold text-slate-950 text-xs">
-                    {user.name.substring(0, 1).toUpperCase()}
-                  </div>
-                  <span className="text-xs text-slate-300 hidden sm:inline truncate max-w-[100px]">{user.name}</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
-                </button>
-
-                {/* Dropdown Menu block */}
-                <AnimatePresence>
-                  {profileDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 mt-2 w-52 rounded-xl bg-[#0f0b1c] border border-violet-500/20 shadow-2xl overflow-hidden p-1 z-50 backdrop-blur-xl"
-                    >
-                      <button
-                        onClick={() => {
-                          setShowProfileModal(true);
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-slate-300 hover:text-slate-100 hover:bg-violet-600/10 rounded-lg text-left font-mono"
-                      >
-                        <User className="w-4 h-4 text-violet-400" />
-                        <span>View Profile</span>
-                      </button>
-                      <button
-                        onClick={() => {
-                          setCurrentView("onboarding");
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-slate-300 hover:text-slate-100 hover:bg-violet-600/10 rounded-lg text-left font-mono border-t border-violet-500/5"
-                      >
-                        <Settings className="w-4 h-4 text-cyan-400" />
-                        <span>Switch Role</span>
-                      </button>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg text-left font-mono border-t border-violet-500/5"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Logout Session</span>
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
+            {/* Middle Nav Links */}
+            <nav className="hidden md:flex items-center space-x-8">
               <button
-                onClick={() => setCurrentView("auth")}
-                className="px-4 py-2 rounded-lg bg-slate-950/60 border border-violet-500/15 hover:border-violet-500/30 text-violet-300 hover:text-slate-100 text-xs font-mono tracking-wider uppercase transition-all cursor-pointer"
+                onClick={() => {
+                  setCurrentView("landing");
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }, 50);
+                }}
+                className={`text-xs font-mono tracking-widest uppercase font-bold relative pb-1 transition-colors cursor-pointer ${
+                  currentView === "landing" ? "text-violet-400" : "text-slate-400 hover:text-slate-200"
+                }`}
               >
-                Access Console
+                Nexus
+                {currentView === "landing" && (
+                  <motion.div
+                    layoutId="activeHeaderNav"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-violet-500"
+                  />
+                )}
               </button>
-            )}
-          </div>
-        </header>
+              <button
+                onClick={() => {
+                  setCurrentView("landing");
+                  setTimeout(() => {
+                    const el = document.getElementById("core-capacities-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+                className="text-xs font-mono tracking-widest uppercase font-bold text-slate-400 hover:text-slate-200 pb-1 cursor-pointer"
+              >
+                Capabilities
+              </button>
+              <button
+                onClick={() => {
+                  setCurrentView("landing");
+                  setTimeout(() => {
+                    const el = document.getElementById("architectural-flow-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+                className="text-xs font-mono tracking-widest uppercase font-bold text-slate-400 hover:text-slate-200 pb-1 cursor-pointer"
+              >
+                Systems
+              </button>
+              <button
+                onClick={() => setCurrentView("pricing")}
+                className={`text-xs font-mono tracking-widest uppercase font-bold relative pb-1 transition-colors cursor-pointer ${
+                  currentView === "pricing" ? "text-violet-400" : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                Pricing
+                {currentView === "pricing" && (
+                  <motion.div
+                    layoutId="activeHeaderNav"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-violet-500"
+                  />
+                )}
+              </button>
+            </nav>
+
+            {/* Right button */}
+            <div>
+              <button
+                onClick={() => {
+                  if (user) setCurrentView("dashboard");
+                  else setCurrentView("auth");
+                }}
+                className="px-6 py-2 rounded-full bg-violet-600 hover:bg-violet-500 text-slate-100 text-xs font-mono tracking-wider uppercase font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-violet-500/20 glow-purple cursor-pointer"
+              >
+                Initiate
+              </button>
+            </div>
+          </header>
+        ) : (
+          <header className="static z-40 w-full glassmorphic border-b border-violet-500/15 backdrop-blur-xl px-6 py-4 flex items-center justify-between" id="sticky-header">
+            {/* Left Brand block with toggleable drawer */}
+            <div className="flex items-center space-x-4">
+              {user && (
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="p-2 rounded-xl bg-violet-600/10 hover:bg-violet-600/20 border border-violet-500/15 hover:border-violet-500/30 text-violet-300 transition-all cursor-pointer"
+                  title="Open Conversation History"
+                  id="sidebar-toggle-btn"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              )}
+              <div className="flex items-center space-x-2.5 cursor-pointer" onClick={() => setCurrentView("landing")}>
+                <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-pink-500 p-0.5 glow-purple">
+                  <div className="w-full h-full bg-slate-950 rounded-md flex items-center justify-center">
+                    <Cpu className="w-4 h-4 text-violet-400" />
+                  </div>
+                </div>
+                <span className="font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-100 to-pink-300 tracking-wider text-sm">
+                  AETHERIS AI
+                </span>
+              </div>
+            </div>
+
+            {/* Sticky Middle indicator */}
+            <div className="hidden md:flex items-center space-x-2 bg-slate-950/40 border border-violet-500/5 px-4 py-1.5 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+              <span className="font-mono text-[10px] text-slate-400 tracking-widest uppercase font-bold">
+                AI WORKFLOW OPERATIONS
+              </span>
+            </div>
+
+            {/* Right Navigation elements */}
+            <div className="flex items-center space-x-3.5">
+              <button
+                onClick={() => setCurrentView("pricing")}
+                className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-slate-100 text-xs font-mono tracking-wider uppercase font-bold transition-all duration-300 hover:scale-105 glow-purple cursor-pointer"
+              >
+                UPGRADE
+              </button>
+
+              {user ? (
+                <div className="relative">
+                  {/* Profile Trigger */}
+                  <button
+                    onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                    className="flex items-center space-x-2 bg-slate-950/60 hover:bg-slate-900 border border-violet-500/15 hover:border-violet-500/30 px-3 py-2 rounded-xl transition-all cursor-pointer"
+                    id="profile-dropdown-btn"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-violet-500 to-pink-500 flex items-center justify-center font-bold text-slate-950 text-xs">
+                      {user.name.substring(0, 1).toUpperCase()}
+                    </div>
+                    <span className="text-xs text-slate-300 hidden sm:inline truncate max-w-[100px]">{user.name}</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
+                  </button>
+
+                  {/* Dropdown Menu block */}
+                  <AnimatePresence>
+                    {profileDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute right-0 mt-2 w-52 rounded-xl bg-[#0f0b1c] border border-violet-500/20 shadow-2xl overflow-hidden p-1 z-50 backdrop-blur-xl"
+                      >
+                        <button
+                          onClick={() => {
+                            setShowProfileModal(true);
+                            setProfileDropdownOpen(false);
+                          }}
+                          className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-slate-300 hover:text-slate-100 hover:bg-violet-600/10 rounded-lg text-left font-mono"
+                        >
+                          <User className="w-4 h-4 text-violet-400" />
+                          <span>View Profile</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setCurrentView("onboarding");
+                            setProfileDropdownOpen(false);
+                          }}
+                          className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-slate-300 hover:text-slate-100 hover:bg-violet-600/10 rounded-lg text-left font-mono border-t border-violet-500/5"
+                        >
+                          <Settings className="w-4 h-4 text-cyan-400" />
+                          <span>Switch Role</span>
+                        </button>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center space-x-3 px-3.5 py-3 text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg text-left font-mono border-t border-violet-500/5"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>Logout Session</span>
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setCurrentView("auth")}
+                  className="px-4 py-2 rounded-lg bg-slate-950/60 border border-violet-500/15 hover:border-violet-500/30 text-violet-300 hover:text-slate-100 text-xs font-mono tracking-wider uppercase transition-all cursor-pointer"
+                >
+                  Access Console
+                </button>
+              )}
+            </div>
+          </header>
+        )
       )}
 
       {/* Main Multi-Screen Content Manager */}

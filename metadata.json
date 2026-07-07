@@ -1,6 +1,6 @@
 {
   "name": "Aetheris Productivity Core",
-  "description": "Premium cyber-luxe cognitive dashboard featuring dynamic Eisenhower task prioritization, interactive habit streaks, role-specific Grok AI prompt workflows, and persistent Supabase database connections.",
+  "description": "Premium cyber-luxe cognitive dashboard and AI workflow console featuring an AI Instagram caption generator, YouTube caption generator, AI code generator, Mail analyzer, Mail drafter, Notes summary, and AI quiz generator powered by Grok AI.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
