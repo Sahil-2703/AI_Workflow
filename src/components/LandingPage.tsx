@@ -82,7 +82,7 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-sm md:text-base text-slate-400 font-sans max-w-xl font-light leading-relaxed mb-10"
           >
-            Orchestrate complex intelligence pipelines with our architectural engine. Designed for the elite developers of the new digital age.
+            Transform ideas into intelligent workflows with AI that understands documents, code, research, and communication.
           </motion.p>
 
           {/* Action Buttons */}
@@ -289,26 +289,26 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
             Architectural Flow
           </h2>
           <p className="text-xs text-slate-400 font-sans font-light tracking-wide max-w-lg mx-auto leading-relaxed">
-            From ideation to deployment in three orbital steps.
+            From ideation to execution in five cohesive steps.
           </p>
         </div>
 
         {/* Steps diagram connected by horizontal line on desktop */}
         <div className="relative">
           {/* Connector Line */}
-          <div className="hidden lg:block absolute top-[44px] left-[15%] right-[15%] h-[1px] bg-slate-900 z-0" />
+          <div className="hidden lg:block absolute top-[44px] left-[10%] right-[10%] h-[1px] bg-slate-900/60 z-0" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
             {/* Step 1 */}
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center font-mono text-xs font-black tracking-widest text-violet-400 shadow-xl mb-6 hover:border-violet-500/30 hover:scale-105 transition-all duration-300">
                 01
               </div>
               <h3 className="text-sm font-semibold text-slate-200 mb-2">
-                Define Nexus
+                Ask
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed max-w-xs font-light">
-                Configure your initial parameters and connect your proprietary data nodes.
+                Input your questions, documents, or data to define your task.
               </p>
             </div>
 
@@ -318,10 +318,10 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
                 02
               </div>
               <h3 className="text-sm font-semibold text-slate-200 mb-2">
-                Calibrate AI
+                Understand
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed max-w-xs font-light">
-                Fine-tune the neural weights using our visual orchestrator interface.
+                The AI analyzes context, extracts code, and processes files instantly.
               </p>
             </div>
 
@@ -331,10 +331,36 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
                 03
               </div>
               <h3 className="text-sm font-semibold text-slate-200 mb-2">
-                Initiate Pulse
+                Organize
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed max-w-xs font-light">
-                Deploy your workflow to the edge with millisecond latency globally.
+                Structure and filter your assets into highly structured schemas.
+              </p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center font-mono text-xs font-black tracking-widest text-violet-400 shadow-xl mb-6 hover:border-violet-500/30 hover:scale-105 transition-all duration-300">
+                04
+              </div>
+              <h3 className="text-sm font-semibold text-slate-200 mb-2">
+                Build
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed max-w-xs font-light">
+                Design tailored workflows with custom parameters and logic rules.
+              </p>
+            </div>
+
+            {/* Step 5 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center font-mono text-xs font-black tracking-widest text-violet-400 shadow-xl mb-6 hover:border-violet-500/30 hover:scale-105 transition-all duration-300">
+                05
+              </div>
+              <h3 className="text-sm font-semibold text-slate-200 mb-2">
+                Generate
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed max-w-xs font-light">
+                Execute optimized pipelines to deliver accurate answers, code, or documents.
               </p>
             </div>
           </div>
@@ -348,24 +374,29 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
           <div className="lg:col-span-8 bg-slate-950/40 border border-slate-900 rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group hover:border-violet-500/15 transition-all duration-300">
             <div>
               <h3 className="font-display font-black text-xl md:text-2xl text-slate-100 tracking-wide mb-3">
-                Omniscient Chat
+                Intelligent AI Workspace
               </h3>
               <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-light max-w-xl mb-8">
-                Interrogate your datasets with natural language. Our conversational engine understands context across billions of parameters.
+                Create, analyze, research, and automate everyday work with AI that keeps every conversation, document, and idea organized in one place.
               </p>
             </div>
             
             {/* Minimal Dialogue Mockup representation inside card */}
             <div className="bg-slate-950/80 border border-slate-900/60 rounded-xl p-4 font-mono text-[10px] space-y-3.5 shadow-2xl relative z-10">
               <div className="flex items-start space-x-2.5">
-                <span className="text-violet-400 font-extrabold uppercase text-[9px] shrink-0">prompt_req:</span>
-                <span className="text-slate-300">Analyse Q4 subscription cohort retention dynamics.</span>
+                <span className="text-violet-400 font-extrabold uppercase text-[9px] shrink-0">Prompt</span>
+                <span className="text-slate-300">
+                  Generate a professional email replying to a client's pricing inquiry and attach a concise proposal summary.
+                </span>
               </div>
               <div className="w-full h-px bg-slate-900/60" />
               <div className="flex items-start space-x-2.5">
-                <span className="text-emerald-400 font-extrabold uppercase text-[9px] shrink-0">aetheris:</span>
-                <span className="text-slate-400 leading-relaxed">
-                  Analyzing cohort 2026-Q4. High retention (87%) correlated to active token utilization thresholds and premium onboarding completion.
+                <span className="text-emerald-400 font-extrabold uppercase text-[9px] shrink-0">AI Workspace</span>
+                <span className="text-slate-400 leading-relaxed block whitespace-pre-line">
+                  ✓ Intent understood{"\n"}
+                  ✓ Professional email drafted{"\n"}
+                  ✓ Proposal summarized{"\n"}
+                  ✓ Conversation saved for future reference
                 </span>
               </div>
             </div>
@@ -378,10 +409,10 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
                 <Network className="w-4 h-4 animate-pulse" />
               </div>
               <h3 className="font-display font-black text-lg text-slate-100 tracking-wide mb-2">
-                Workflow Builder
+                Smart AI Workflows
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light mb-6">
-                Visual drag-and-drop logic for complex AI agents.
+                Switch between specialized AI workflows for emails, PDFs, coding, resumes, research, and more—all from one intelligent workspace.
               </p>
             </div>
 
@@ -403,17 +434,17 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
                 <Compass className="w-4 h-4" />
               </div>
               <h3 className="font-display font-black text-lg text-slate-100 tracking-wide mb-2">
-                Zero Latency
+                Real-Time AI Responses
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light mb-6">
-                Edge computing nodes in 120 global regions for instant responses.
+                Experience fast, streaming AI that writes, analyzes, researches, and creates in real time.
               </p>
             </div>
 
             {/* Live Indicator block */}
             <div className="flex items-center space-x-2 bg-slate-900/60 border border-slate-900/80 px-3.5 py-2.5 rounded-xl font-mono text-[9px]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-slate-400 font-bold uppercase tracking-wider">ALL GLOBAL NODES: ONLINE (4ms)</span>
+              <span className="text-slate-400 font-bold uppercase tracking-wider">AI ENGINE ONLINE</span>
             </div>
           </div>
 
@@ -424,17 +455,17 @@ export default function LandingPage({ onGetStarted, onOpenPricing }: LandingPage
                 <Layers className="w-4 h-4" />
               </div>
               <h3 className="font-display font-black text-lg text-slate-100 tracking-wide mb-2">
-                Model Marketplace
+                AI Workspaces
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-light mb-6">
-                Access pre-trained specialized models for medicine, law, and engineering instantly.
+                Access specialized AI experiences built for everyday productivity—from writing and coding to research and document analysis.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-1.5">
-              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded">Bio-Med</span>
-              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded">LawX</span>
-              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-pink-300 bg-pink-500/10 border border-pink-500/20 px-2 py-0.5 rounded">NeuroTech</span>
+              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded">Email Writer</span>
+              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded">PDF Analyzer</span>
+              <span className="text-[8px] font-mono uppercase font-black tracking-wider text-pink-300 bg-pink-500/10 border border-pink-500/20 px-2 py-0.5 rounded">Code Assistant</span>
             </div>
           </div>
 
