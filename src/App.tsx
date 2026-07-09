@@ -584,6 +584,13 @@ export default function App() {
             <OnboardingPage
               key="onboarding"
               onSuccess={handleOnboardingSuccess}
+              onBack={() => {
+                if (user && user.role) {
+                  setCurrentView("dashboard");
+                } else {
+                  setCurrentView("landing");
+                }
+              }}
             />
           )}
 
